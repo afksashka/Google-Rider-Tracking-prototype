@@ -2,8 +2,9 @@ package com.example.google_rider_tracking;
 
 import android.net.Uri;
 
-import com.google.android.libraries.mapsplatform.transportation.consumer.auth.AuthTokenContext;
-import com.google.android.libraries.mapsplatform.transportation.consumer.auth.AuthTokenFactory;
+import com.google.android.libraries.mapsplatform.transportation.driver.api.base.data.AuthTokenContext;
+import com.google.android.libraries.mapsplatform.transportation.driver.api.base.data.AuthTokenContext.AuthTokenFactory;
+
 
 import java.io.IOException;
 import java.io.InputStreamReader;
