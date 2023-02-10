@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.app.Application;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -61,13 +62,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     public void onNavigatorReady(Navigator navigatorSdk) {
                         // Keep a reference to the Navigator (used to configure and start nav)
                         navigator = navigatorSdk;
+                        initDriverContext();
                     }
                     @Override
                     public void onError(int i) {
-
+                        Log.d("NAV_init_error", "Error: " + i);
                     }
                 }
         );
+    }
+    private void initDriverContext(){
         Application application = this.getApplication();
         JsonAuthTokenFactory authTokenFactory = new JsonAuthTokenFactory();
         DriverContext driverContext = DriverContext.builder(application)
@@ -80,8 +84,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .build();
         RidesharingDriverApi ridesharingDriverApi = RidesharingDriverApi.createInstance(driverContext);
         RidesharingVehicleReporter vehicleReporter = ridesharingDriverApi.getRidesharingVehicleReporter();
-
-
-
+        vehicleReporter.enableLocationTracking();
+        vehicleReporter.setVehicleState(RidesharingVehicleReporter.VehicleState.ONLINE);
     }
 }
