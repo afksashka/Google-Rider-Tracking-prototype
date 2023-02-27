@@ -62,14 +62,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         updateCameraPerspective(isCameraTilted);
     }
-    private void setupNavFragment() {
-        navFragment = SupportNavigationFragment.newInstance();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.nav_fragment_frame, navFragment, null)
-                .setReorderingAllowed(true)
-                .commit();
-    }
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -106,7 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         JsonAuthTokenFactory authTokenFactory = new JsonAuthTokenFactory();
         DriverContext driverContext = DriverContext.builder(application)
                 .setProviderId("xpress-366609")
-                .setVehicleId("v-001")
+                .setVehicleId("v-001-sb")
                 .setAuthTokenFactory(authTokenFactory)
                 .setNavigator(navigator)
                 .setRoadSnappedLocationProvider(
@@ -117,7 +110,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         vehicleReporter.enableLocationTracking();
         vehicleReporter.setVehicleState(RidesharingVehicleReporter.VehicleState.ONLINE);
         Log.d("rider-tag", "Vehicle Reporter enabled? " + vehicleReporter.isLocationTrackingEnabled());
-        registerVehicle("v-001");
+        registerVehicle("v-001-sb");
     }
 
     public ListenableFuture<VehicleModel> registerVehicle(String vehicleId) {
