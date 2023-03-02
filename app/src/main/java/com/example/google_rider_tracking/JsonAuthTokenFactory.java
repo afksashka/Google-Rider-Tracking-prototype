@@ -1,10 +1,10 @@
 package com.example.google_rider_tracking;
 
 import android.net.Uri;
+import android.util.Log;
 
 import com.google.android.libraries.mapsplatform.transportation.driver.api.base.data.AuthTokenContext;
 import com.google.android.libraries.mapsplatform.transportation.driver.api.base.data.AuthTokenContext.AuthTokenFactory;
-
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,12 +31,12 @@ class JsonAuthTokenFactory implements AuthTokenFactory {
         String url =
                 new Uri.Builder()
                         .scheme("https")
-                        .authority("xpress-366609.uc.r.appspot.com/token")
+                        .authority("xpress-366609.uc.r.appspot.com")
                         .appendPath("token")
                         .appendQueryParameter("vehicleId", vehicleId)
                         .build()
                         .toString();
-
+        Log.d("token", url);
         try (Reader r = new InputStreamReader(new URL(url).openStream())) {
             com.google.gson.JsonObject obj
                     = com.google.gson.JsonParser.parseReader(r).getAsJsonObject();
